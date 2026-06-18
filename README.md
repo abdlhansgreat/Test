@@ -26,15 +26,31 @@ you fresh and makes big tasks feel manageable.
 
 ## Usage
 
-Open `index.html` in any modern browser. That's it.
+The app loads as an ES module, so run it from a local server rather than opening
+the file directly (browsers block module scripts on `file://`).
 
-Or serve it locally (handy for testing notifications, which some browsers
-restrict on `file://`):
+### With npm (dev server + build)
+
+For a hot-reloading dev server via [Vite](https://vitejs.dev):
 
 ```bash
-# Python 3
-python3 -m http.server 8000
-# then visit http://localhost:8000
+npm install      # first time only
+npm run dev      # serves at http://localhost:5173 (add -- --open to auto-open)
+```
+
+Other scripts:
+
+```bash
+npm run build    # bundle to dist/
+npm run preview  # serve the production build locally
+```
+
+### Without npm
+
+Serve the folder with any static file server:
+
+```bash
+python3 -m http.server 8000   # then visit http://localhost:8000
 ```
 
 ## Controls
@@ -50,9 +66,11 @@ python3 -m http.server 8000
 ## Project structure
 
 ```
-index.html   — markup
-styles.css   — styling and per-mode theming
-app.js       — timer engine, settings, notifications
+index.html      — markup
+styles.css      — styling and per-mode theming
+app.js          — timer engine, settings, notifications
+package.json    — npm scripts (dev, build, preview)
+vite.config.js  — dev-server / build config (optional tooling)
 ```
 
 ## License

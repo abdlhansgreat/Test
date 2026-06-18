@@ -5,6 +5,8 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Logs / dependencies (in case tooling is added later)
+# Dependencies / build output / tooling caches
 node_modules/
+dist/
+.vite/
 *.log

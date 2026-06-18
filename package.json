@@ -1,0 +1,16 @@
+{
+  "name": "pomodoro-timer",
+  "version": "1.0.0",
+  "description": "A clean, dependency-free Pomodoro timer to help you focus.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.0.16"
+  }
+}
