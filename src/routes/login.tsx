@@ -3,7 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { Aperture, Mail, Lock, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+import { signInWithOAuth } from "@/integrations/auth/oauth";
 import { SunButton } from "@/components/sun/SunButton";
 
 const searchSchema = z.object({
@@ -69,15 +69,13 @@ function LoginPage() {
 
   const onGoogleLogin = async () => {
     setError(null);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
-      setError(result.error.message ?? "Google sign-in failed");
+    const { error } = await signInWithOAuth("google", window.location.origin);
+    if (error) {
+      setError(error.message ?? "Google sign-in failed");
       return;
     }
-    if (result.redirected) return;
-    await routeAfterLogin(navigate, search.redirect);
+    // On success the browser redirects to Google; Supabase returns the
+    // session on redirect back and routing resumes from there.
   };
 
   return (

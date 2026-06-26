@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Aperture, ArrowRight, ArrowLeft, Camera, Heart, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+import { signInWithOAuth } from "@/integrations/auth/oauth";
 import { SunButton } from "@/components/sun/SunButton";
 import { cn } from "@/lib/utils";
 
@@ -59,10 +59,8 @@ function SignupPage() {
   const onGoogle = async () => {
     if (!role) return;
     sessionStorage.setItem("pl_intended_role", role);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) setError(result.error.message ?? "Google sign-in failed");
+    const { error } = await signInWithOAuth("google", window.location.origin);
+    if (error) setError(error.message ?? "Google sign-in failed");
   };
 
   return (
