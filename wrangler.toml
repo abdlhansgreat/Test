@@ -1,0 +1,9 @@
+# Cloudflare Workers deployment for PhotoLancer (TanStack Start SSR).
+# Static client assets are served first; all other requests hit the SSR fetch handler.
+name = "photolancer"
+main = "dist/server/server.js"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist/client"
